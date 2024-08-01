@@ -1,0 +1,188 @@
+//Branch table creation
+
+create table branch(
+    Bname varchar(5) primary key,
+    yoe integer,
+    intake integer);
+
+Table created.
+
+//Student table cration
+
+create table student(
+    Rollno integer primary key,
+    Name varchar(20) not null,
+    Age integer,
+    Bname varchar(5),
+    perc number(5,2),
+    email varchar(50) unique,
+    foreign key(Bname) 
+    references branch(Bname));
+
+Table created.
+
+//Table R created
+
+create table R(A integer,B integer,C varchar(2));
+
+Table created
+
+//Alter add,modify,drop
+
+alter table student add rank integer;
+alter table student modify name varchar(15);
+alter table student add sno integer;
+alter table student drop column sno;
+
+Table altered.
+Table altered.
+Table altered.
+Table altered.
+
+//drop table
+
+drop table R;
+
+Table dropped.
+
+//Insert values
+
+insert into branch values('CSE',2008,180);
+insert into branch values('IT',2008,180);
+insert into branch values('ECE',2009,120);
+insert into branch values('EEE',2010,60);
+insert into student values(520,'ANIL',19,'CSE',75.6,'anil@gmail.com',5);
+insert into student values(404,'KUMAR',19,'CSE',78.3,'kumar@gmail.com',4);
+insert into student values(510,'SRINU',18,'CSE',76,'srinu3@gmail.com',3);
+insert into student values(1240,'ANIL',19,'IT',80.5,'anil5@gmail.com',6);
+insert into student values(532,'RAVI',20,'CSE',85.6,'ravi@gmail.com',2);
+insert into student values(420,'SRINU',19,'ECE',76,'srinu@gmail.com',1);
+
+1 row(s) inserted.
+1 row(s) inserted.
+1 row(s) inserted.
+1 row(s) inserted.
+1 row(s) inserted.
+1 row(s) inserted.
+1 row(s) inserted.
+1 row(s) inserted.
+1 row(s) inserted.
+1 row(s) inserted.
+
+//Truncate table
+
+truncate table student;
+truncate table branch;
+
+Table truncated.
+Table truncated.
+
+//Display student table
+
+select* from student;
+
+ROLLNO	NAME	AGE	BNAME	PERC	EMAIL	RANK
+520	ANIL	19	CSE	75.6	anil@gmail.com	5
+404	KUMAR	19	CSE	78.3	kumar@gmail.com	4
+510	SRINU	18	CSE	76	srinu3@gmail.com	3
+1240	ANIL	19	IT	80.5	anil5@gmail.com	6
+532	RAVI	20	CSE	85.6	ravi@gmail.com	2
+420	SRINU	19	ECE	76	srinu@gmail.com	1
+
+//Display branch table
+
+select* from branch;
+
+BNAME	YOE	INTAKE
+CSE	2008	180
+IT	2008	180
+ECE	2009	120
+EEE	2010	60
+
+//Student info in the alphabetical order of student names
+
+select * from student 
+order by Name;
+
+ROLLNO	NAME	AGE	BNAME	PERC	EMAIL	RANK
+520	ANIL	19	CSE	75.6	anil@gmail.com	5
+1240	ANIL	19	IT	80.5	anil5@gmail.com	6
+404	KUMAR	19	CSE	78.3	kumar@gmail.com	4
+532	RAVI	20	CSE	85.6	ravi@gmail.com	2
+420	SRINU	19	ECE	76	srinu@gmail.com	1
+510	SRINU	18	CSE	76	srinu3@gmail.com	3
+
+//Name and percentages of CSE students
+
+select Name,perc
+from student 
+where Bname='CSE';
+
+NAME	PERC
+ANIL	75.6
+KUMAR	78.3
+SRINU	76
+RAVI	85.6
+
+//Names of CSE  students who got distinction
+
+select Name
+from student where perc>=80.0;
+
+NAME
+ANIL
+RAVI
+
+//Names and percentages of CSE & IT
+
+select Name,perc
+from student where Bname='CSE' or Bname='IT';
+
+NAME	PERC
+ANIL	75.6
+KUMAR	78.3
+SRINU	76
+ANIL	80.5
+RAVI	85.6
+
+//Update the percentage of student, whose roll number is 420, to 70
+
+update student
+set perc=70
+where Rollno=420;
+select Name,perc
+from student
+where Rollno=420;
+
+1 row(s) updated.
+NAME	PERC
+SRINU	70
+
+// Delete the information of student, whose roll number is 1240
+
+delete from student
+where Rollno=1240;
+
+1 row(s) deleted.
+//Find the details of students whose age is between 15 and 18.
+
+select * from student
+where Age between 15 and 18;
+
+ROLLNO	NAME	AGE	BNAME	PERC	EMAIL	RANK
+510	SRINU	18	CSE	76	srinu3@gmail.com	3
+
+//Update the email ID of student, whose roll number is 304, to kumar@gmail.com
+
+update student
+set email='kumar2@gmail.com'
+where Rollno=404;
+select *
+from student
+where Rollno=404;
+
+1 row(s) updated.
+
+ROLLNO	NAME	AGE	BNAME	PERC	EMAIL	RANK
+404	KUMAR	19	CSE	78.3	kumar2@gmail.com	4
+
