@@ -15,7 +15,7 @@ create table emp(empno  number(4) primary key,
     job varchar2(9),
     mgr number(4),
     hiredate date,
-	sal number(7,2),
+    sal number(7,2),
     comm number(7,2),
     deptno number(2), 
     foreign key(deptno)
@@ -276,3 +276,6 @@ EMPNO	ENAME	SAL	SALARY_INCREASED
 
 //19) Display all the departments where employee salary greater than average salary of that
 department.
+
+select deptno from emp e,dept d
+where sal>(select avg(sal) from emp e where e.deptno=d.deptno);
