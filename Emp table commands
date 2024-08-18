@@ -95,3 +95,210 @@ EMPNO	ENAME	JOB	MGR	HIREDATE	SAL	COMM	DEPTNO
 
 //3) Display all the records in emp table where employee does not belong to deptno 30.
 
+select * from emp
+where deptno not in (select deptno from emp where deptno=30);
+
+select * from emp
+where deptno<>30;
+
+EMPNO	ENAME	JOB	MGR	HIREDATE	SAL	COMM	DEPTNO
+7839	KING	PRESIDENT	 - 	17-NOV-81	5000	 - 	10
+7782	CLARK	MANAGER	7839	09-JUN-81	2450	 - 	10
+7566	JONES	MANAGER	7839	02-APR-81	2975	 - 	20
+7788	SCOTT	ANALYST	7566	13-JUL-87	3000	 - 	20
+7902	FORD	ANALYST	7566	03-DEC-81	3000	 - 	20
+7369	SMITH	CLERK	7902	17-DEC-80	800	 - 	20
+7876	ADAMS	CLERK	7788	13-JUL-87	1100	 - 	20
+7934	MILLER	CLERK	7782	23-JAN-82	1300	 - 	10
+
+//4) Display total number of records in Emp table.
+
+select count(*)
+from emp;
+
+COUNT(*)
+14
+
+//5) Display emp table with salary descending order.
+
+select * from emp
+order by sal desc;
+
+EMPNO	ENAME	JOB	MGR	HIREDATE	SAL	COMM	DEPTNO
+7839	KING	PRESIDENT	 - 	17-NOV-81	5000	 - 	10
+7788	SCOTT	ANALYST	7566	13-JUL-87	3000	 - 	20
+7902	FORD	ANALYST	7566	03-DEC-81	3000	 - 	20
+7566	JONES	MANAGER	7839	02-APR-81	2975	 - 	20
+7698	BLAKE	MANAGER	7839	01-MAY-81	2850	 - 	30
+7782	CLARK	MANAGER	7839	09-JUN-81	2450	 - 	10
+7499	ALLEN	SALESMAN	7698	20-FEB-81	1600	300	30
+7844	TURNER	SALESMAN	7698	08-SEP-81	1500	 - 	30
+7934	MILLER	CLERK	7782	23-JAN-82	1300	 - 	10
+7654	MARTIN	SALESMAN	7698	28-SEP-81	1250	1400	30
+7521	WARD	SALESMAN	7698	22-FEB-81	1250	500	30
+7876	ADAMS	CLERK	7788	13-JUL-87	1100	 - 	20
+7900	JAMES	CLERK	7698	03-DEC-81	950	 - 	30
+7369	SMITH	CLERK	7902	17-DEC-80	800	 - 	20
+
+//6) Display first five records in employee table.
+
+select * from emp
+fetch first 5 rows only;
+
+EMPNO	ENAME	JOB	MGR	HIREDATE	SAL	COMM	DEPTNO
+7839	KING	PRESIDENT	 - 	17-NOV-81	5000	 - 	10
+7698	BLAKE	MANAGER	7839	01-MAY-81	2850	 - 	30
+7782	CLARK	MANAGER	7839	09-JUN-81	2450	 - 	10
+7566	JONES	MANAGER	7839	02-APR-81	2975	 - 	20
+7788	SCOTT	ANALYST	7566	13-JUL-87	3000	 - 	20
+
+//7) Display all the records in emp table order by ascending deptno, descending salary.
+
+select * from emp
+order by deptno,sal desc;
+
+EMPNO	ENAME	JOB	MGR	HIREDATE	SAL	COMM	DEPTNO
+7839	KING	PRESIDENT	 - 	17-NOV-81	5000	 - 	10
+7782	CLARK	MANAGER	7839	09-JUN-81	2450	 - 	10
+7934	MILLER	CLERK	7782	23-JAN-82	1300	 - 	10
+7788	SCOTT	ANALYST	7566	13-JUL-87	3000	 - 	20
+7902	FORD	ANALYST	7566	03-DEC-81	3000	 - 	20
+7566	JONES	MANAGER	7839	02-APR-81	2975	 - 	20
+7876	ADAMS	CLERK	7788	13-JUL-87	1100	 - 	20
+7369	SMITH	CLERK	7902	17-DEC-80	800	 - 	20
+7698	BLAKE	MANAGER	7839	01-MAY-81	2850	 - 	30
+7499	ALLEN	SALESMAN	7698	20-FEB-81	1600	300	30
+7844	TURNER	SALESMAN	7698	08-SEP-81	1500	 - 	30
+7521	WARD	SALESMAN	7698	22-FEB-81	1250	500	30
+7654	MARTIN	SALESMAN	7698	28-SEP-81	1250	1400	30
+7900	JAMES	CLERK	7698	03-DEC-81	950	 - 	30
+
+//8) Display all employees those who were joined in year 1981.
+
+select * from emp
+where extract (year from hiredate)=1981;
+
+EMPNO	ENAME	JOB	MGR	HIREDATE	SAL	COMM	DEPTNO
+7839	KING	PRESIDENT	 - 	17-NOV-81	5000	 - 	10
+7698	BLAKE	MANAGER	7839	01-MAY-81	2850	 - 	30
+7782	CLARK	MANAGER	7839	09-JUN-81	2450	 - 	10
+7566	JONES	MANAGER	7839	02-APR-81	2975	 - 	20
+7902	FORD	ANALYST	7566	03-DEC-81	3000	 - 	20
+7499	ALLEN	SALESMAN	7698	20-FEB-81	1600	300	30
+7521	WARD	SALESMAN	7698	22-FEB-81	1250	500	30
+7654	MARTIN	SALESMAN	7698	28-SEP-81	1250	1400	30
+7844	TURNER	SALESMAN	7698	08-SEP-81	1500	 - 	30
+7900	JAMES	CLERK	7698	03-DEC-81	950	 - 	30
+
+//10) Display the records in emp table where MGR in 7698,7566 and sal should be greater then
+1500
+
+select * from emp
+where mgr in(7698,7566) and sal>1500;
+
+EMPNO	ENAME	JOB	MGR	HIREDATE	SAL	COMM	DEPTNO
+7788	SCOTT	ANALYST	7566	13-JUL-87	3000	 - 	20
+7902	FORD	ANALYST	7566	03-DEC-81	3000	 - 	20
+7499	ALLEN	SALESMAN	7698	20-FEB-81	1600	300	30
+
+//11) Display all employees where their salary is less then the Ford’s salary?
+
+select * from emp
+where sal<(select sal from emp
+    where ename='FORD');
+
+EMPNO	ENAME	JOB	MGR	HIREDATE	SAL	COMM	DEPTNO
+7698	BLAKE	MANAGER	7839	01-MAY-81	2850	 - 	30
+7782	CLARK	MANAGER	7839	09-JUN-81	2450	 - 	10
+7566	JONES	MANAGER	7839	02-APR-81	2975	 - 	20
+7369	SMITH	CLERK	7902	17-DEC-80	800	 - 	20
+7499	ALLEN	SALESMAN	7698	20-FEB-81	1600	300	30
+7521	WARD	SALESMAN	7698	22-FEB-81	1250	500	30
+7654	MARTIN	SALESMAN	7698	28-SEP-81	1250	1400	30
+7844	TURNER	SALESMAN	7698	08-SEP-81	1500	 - 	30
+7876	ADAMS	CLERK	7788	13-JUL-87	1100	 - 	20
+7900	JAMES	CLERK	7698	03-DEC-81	950	 - 	30
+7934	MILLER	CLERK	7782	23-JAN-82	1300	 - 	10
+
+//12) Display all the records in EMP table along with the rowed.
+
+//13) Write a query to display current date
+
+//14) Display distinct job from emp table.
+
+select distinct job
+from emp;
+
+JOB
+ANALYST
+CLERK
+SALESMAN
+MANAGER
+PRESIDENT
+
+//15)Write a query that displays the employee’s names with the first letter capitalized and all other
+letters lowercase for all employees whose name starts with J, A, or M.
+
+//16) Write a query to display the employee name, department name of all employees who earn a
+commission.
+
+select e.ename,d.dname
+from emp e,dept d
+where e.deptno=d.deptno and comm is not null;
+
+ENAME	DNAME
+ALLEN	SALES
+WARD	SALES
+MARTIN	SALES
+
+//17) Display the empno, ename, sal, and salary increased by 15%.
+
+select empno,ename,sal,sal*0.15
+from emp;
+
+EMPNO	ENAME	SAL	SAL*0.15
+7839	KING	5000	750
+7698	BLAKE	2850	427.5
+7782	CLARK	2450	367.5
+7566	JONES	2975	446.25
+7788	SCOTT	3000	450
+7902	FORD	3000	450
+7369	SMITH	800	120
+7499	ALLEN	1600	240
+7521	WARD	1250	187.5
+7654	MARTIN	1250	187.5
+7844	TURNER	1500	225
+7876	ADAMS	1100	165
+7900	JAMES	950	142.5
+7934	MILLER	1300	195
+
+//18) Display employee names and corresponding manager names 
+
+SELECT
+    e1.ename AS employee_name,
+    e2.ename AS manager_name
+FROM emp e1 LEFT JOIN emp e2
+ON e1.mgr = e2.empno;
+
+EMPLOYEE_NAME	MANAGER_NAME
+BLAKE	KING
+CLARK	KING
+JONES	KING
+ALLEN	BLAKE
+WARD	BLAKE
+MARTIN	BLAKE
+TURNER	BLAKE
+JAMES	BLAKE
+MILLER	CLARK
+SCOTT	JONES
+FORD	JONES
+ADAMS	SCOTT
+SMITH	FORD
+KING	 - 
+
+//19) Display all the departments where employee salary greater than average salary of that
+department.
+
+select deptno from emp
+where sal>all(select avg(sal) from emp group by deptno)
+
